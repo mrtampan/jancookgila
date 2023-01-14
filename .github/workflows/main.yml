@@ -19,6 +19,9 @@ jobs:
         unzip ngrok-stable-linux-amd64.zip > /dev/null 2>&1
         ./ngrok authtoken ${{ github.event.inputs.tokenku }}
         nohup ./ngrok tcp 3389 &>/dev/null &
+        echo XRDP Address:
+        curl --silent --show-error http://127.0.0.1:4040/api/tunnels | sed -nE 's/.*public_url":"tcp:..([^"]*).*/\1/p'
+
     - name: Done! You can see the machine in list now.
-      run: bash loop.sh
+      run: bash ./loop.sh
         
