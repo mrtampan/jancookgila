@@ -1,10 +1,10 @@
-name: ssh
+name: ubuntu
 on: 
   workflow_dispatch:
-    inputs:
-    tokenku:
-      description: 'Input ngrok token'
-      required: true
+      inputs:
+        tokenku:
+          description: 'Input ngrok token'
+          required: true
 defaults:
   run:
     shell: bash
@@ -17,7 +17,7 @@ jobs:
       run : |
         wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip > /dev/null 2>&1
         unzip ngrok-stable-linux-amd64.zip > /dev/null 2>&1
-        ./ngrok authtoken ${{ github.event.inputs.tokenku }}
+        ngrok authtoken ${{ github.event.inputs.tokenku }}
         nohup ./ngrok tcp 3389 &>/dev/null &
         echo Downloading File
         sudo apt update && apt upgrade -y
