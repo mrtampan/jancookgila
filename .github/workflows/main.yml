@@ -18,8 +18,12 @@ jobs:
         wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip > /dev/null 2>&1
         unzip ngrok-stable-linux-amd64.zip > /dev/null 2>&1
         ./ngrok authtoken ${{ github.event.inputs.tokenku }}
-        ./ngrok tcp 3389
+    
+    - name: Running ngrok
+      run: |
+        nohup ./ngrok tcp --region ap 3389
 
     - name: Done! You can see the machine in list now.
-      run: bash ./loop.sh
+      run: |
+        bash ./loop.sh
         
